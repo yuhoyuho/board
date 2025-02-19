@@ -32,5 +32,7 @@
 ✅ 글 삭제 (/board/delete/{id})
 
 ✅ 페이징처리(/board/paging)
+
     ➡️ /board/paging?page=2
+    
     ➡️ 위와 같은 형태의 주소체계를 사용
