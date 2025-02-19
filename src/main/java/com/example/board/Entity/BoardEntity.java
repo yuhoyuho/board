@@ -2,6 +2,7 @@ package com.example.board.Entity;
 
 // DB의 테이블 역할을 하는 클래스 SpringData JPA에서는 거의 필수적으로 사용
 
+import com.example.board.DTO.BoardDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "board_table")
-public class BoardEntity extends BaseEntity{
+public class BoardEntity extends BaseEntity {
     @Id //pk 컬럼 지정. 최소 1개는 필수로 있어야함.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,4 +30,15 @@ public class BoardEntity extends BaseEntity{
 
     @Column
     private int boardHits;
+
+    public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardPass(boardDTO.getBoardPass());
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardContent(boardDTO.getBoardContent());
+        boardEntity.setBoardHits(0);
+
+        return boardEntity;
+    }
 }

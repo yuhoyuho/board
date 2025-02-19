@@ -22,5 +22,4 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
     private LocalDateTime boardUpdatedTime;
 
-
 }
