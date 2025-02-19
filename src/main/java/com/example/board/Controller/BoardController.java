@@ -65,4 +65,13 @@ public class BoardController {
         return "detail";
 //        return "redirect:/board/" + boardDTO.getId();
     }
+
+    @GetMapping("/delete/{id}")
+    // @DeleteMapping을 사용하는것이 RESTful 원칙 상 맞지만
+    // 이 코드에서는 서버에 요청을 보내고 처리하는 것에 집중하여 @GetMapping을 사용
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
+
+        return "redirect:/board/";
+    }
 }
