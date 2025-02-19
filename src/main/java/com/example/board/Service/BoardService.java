@@ -4,6 +4,10 @@ import com.example.board.DTO.BoardDTO;
 import com.example.board.Entity.BoardEntity;
 import com.example.board.Repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,5 +65,16 @@ public class BoardService {
 
     public void delete(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    public Page<BoardDTO> paging(Pageable pageable) {
+        int page = pageable.getPageNumber() - 1; // list처럼 1페이지는 Request 기준으로 0부터 시작
+        int pageLimit = 3;
+
+        // 한 페이지에 3개씩 보여주고 id를 기준으로 내림차순 정렬
+        Page<BoardEntity> boardEntities =
+                boardRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "id")));
+
+        
     }
 }
