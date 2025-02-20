@@ -36,3 +36,22 @@
     ➡️ /board/paging?page=2
     
     ➡️ 위와 같은 형태의 주소체계를 사용
+
+✅ 파일(이미지) 첨부 기능
+
+    ➡️ 단일 파일 첨부
+
+    ➡️ 다중 파일 첨부
+
+    ➡️ 파일 첨부 관련 추가해야할 부분들
+        * save.html
+
+        * BoardDTO
+
+        * BoardService.save()
+
+        * BoardEntity
+
+        * BoadrFileEntity, BoardFileRepository
+
+        * detail.html
