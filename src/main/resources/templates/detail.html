@@ -48,7 +48,7 @@
   <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
 </div>
 
- 댓글 출력 부분
+<!-- 댓글 출력 부분-->
 <div id="comment-list">
   <table>
     <tr>
@@ -60,7 +60,7 @@
     <tr th:each="comment: ${commentList}">
       <td th:text="${comment.id}"></td>
       <td th:text="${comment.commentWriter}"></td>
-      <td th:text="${comment.commentContent}"></td>
+      <td th:text="${comment.commentContents}"></td>
       <td th:text="${comment.commentCreatedTime}"></td>
     </tr>
   </table>
