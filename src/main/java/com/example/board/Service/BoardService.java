@@ -2,6 +2,8 @@ package com.example.board.Service;
 
 import com.example.board.DTO.BoardDTO;
 import com.example.board.Entity.BoardEntity;
+import com.example.board.Entity.BoardFileEntity;
+import com.example.board.Repository.BoardFileRepository;
 import com.example.board.Repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,7 @@ import java.util.Optional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final BoardFileRepository boardFileRepository;
 
     @Transactional
     public void save(BoardDTO boardDTO) throws IOException {
@@ -50,6 +53,13 @@ public class BoardService {
             String storedFileName = System.currentTimeMillis() + "_" + originalFileName; // 3번 과정
             String savePath = "C:/springboot_img/" + storedFileName; // 4번 과정
             boardFile.transferTo(new File(savePath)); // 5번 과정
+
+            BoardEntity boardEntity = BoardEntity.toSaveFileEntity(boardDTO);
+            Long savedId = boardRepository.save(boardEntity).getId();
+
+            BoardEntity board = boardRepository.findById(savedId).get();
+            BoardFileEntity boardFileEntity = BoardFileEntity.toBoardFileEntity(board, originalFileName, storedFileName);
+            boardFileRepository.save(boardFileEntity);
         }
     }
 
